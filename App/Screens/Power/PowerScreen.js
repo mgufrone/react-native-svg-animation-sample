@@ -63,12 +63,12 @@ export default class PowerScreen extends Component {
             minutesLong={calculateMinutesFromAngle(angleLength)}
           />
           <CircularSlider
-            startAngle={startAngle}
+            startAngle={0}
             angleLength={angleLength}
             onUpdate={this.onUpdate}
             segments={5}
             strokeWidth={40}
-            radius={145}
+            radius={130}
             gradientColorFrom="#ff9800"
             gradientColorTo="#ffcf00"
             clockFaceColor="#072859"
