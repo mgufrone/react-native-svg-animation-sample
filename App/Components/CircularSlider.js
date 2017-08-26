@@ -124,9 +124,6 @@ export default class Slider extends CircularSlider {
             >
               <Circle
                 r={(strokeWidth - 1) / 2}
-                fill={bgCircleColor}
-                stroke={gradientColorTo}
-                strokeWidth="1"
               />
               {
                 stopIcon
@@ -145,9 +142,6 @@ export default class Slider extends CircularSlider {
             >
               <Circle
                 r={(strokeWidth - 1) / 2}
-                fill={bgCircleColor}
-                stroke={gradientColorTo}
-                strokeWidth="1"
               />
               {
                 startIcon
