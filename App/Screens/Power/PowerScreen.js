@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
-import CircularSlider from 'react-native-circular-slider';
+import CircularSlider from '../../Components/CircularSlider';
 import PowerProgress from './PowerProgress';
 
 function calculateMinutesFromAngle(angle) {
@@ -58,6 +58,8 @@ export default class PowerScreen extends Component {
       <View style={styles.container}>
         <View>
           <Text>Connecting</Text>
+        </View>
+        <View>
           <PowerProgress
             style={styles.sleepTimeContainer}
             minutesLong={calculateMinutesFromAngle(angleLength)}
