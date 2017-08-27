@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { object, number } from 'prop-types';
 
 const styles = StyleSheet.create({
   timerContainer: {
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
-  const { minutesLong, ...rest } = this.props;
+export const PowerProgress = (props) => {
+  const { minutesLong, ...rest } = props;
 
   const hours = minutesLong.toFixed(2);
 
@@ -45,3 +46,14 @@ export default () => {
     </View>
   );
 };
+
+PowerProgress.propTypes = {
+  minutesLong: number.isRequired,
+  style: object,
+};
+
+PowerProgress.defaultProps = {
+  style: {},
+};
+
+export default PowerProgress;

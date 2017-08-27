@@ -19,8 +19,8 @@ function calculateArcCircle(index0, segments, radius, startAngle0 = 0, angleLeng
   const startAngle = startAngle0 % (2 * Math.PI);
   const angleLength = angleLength0 % (2 * Math.PI);
   const index = index0 + 1;
-  const fromAngle = angleLength / (segments * ((index - 1) + startAngle));
-  const toAngle = angleLength / (segments * (index + startAngle));
+  const fromAngle = (angleLength / segments) * ((index - 1) + startAngle);
+  const toAngle = (angleLength / segments) * (index + startAngle);
   const fromX = radius * Math.sin(fromAngle);
   const fromY = -radius * Math.cos(fromAngle);
   const realToX = radius * Math.sin(toAngle);
@@ -57,8 +57,12 @@ export default class Slider extends CircularSlider {
       angleLength,
       segments,
       strokeWidth,
-      radius, gradientColorFrom, gradientColorTo, bgCircleColor,
-      startIcon, stopIcon } = this.props;
+      radius,
+      gradientColorFrom,
+      gradientColorTo,
+      bgCircleColor,
+      startIcon,
+      stopIcon } = this.props;
 
     const containerWidth = this.getContainerWidth();
 
@@ -79,7 +83,8 @@ export default class Slider extends CircularSlider {
                   fromX,
                   fromY,
                   toX,
-                  toY } = calculateArcCircle(i, segments, radius, startAngle, angleLength);
+                  toY,
+                } = calculateArcCircle(i, segments, radius, startAngle, angleLength);
                 const {
                   fromColor,
                   toColor,
