@@ -4,6 +4,16 @@
   "private": true,
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "espree": "^3.5.0",
     "jest-expo": "~20.0.0",
     "react-test-renderer": "16.0.0-alpha.12"
   },
@@ -17,6 +27,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "d3-interpolate": "^1.1.5",
+    "lodash.range": "^3.2.0",
+    "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.47.0",
     "react-native-animatable": "^1.2.3",
@@ -25,6 +38,7 @@
     "react-native-easy-grid": "^0.1.15",
     "react-native-router-flux": "^4.0.0-beta.19",
     "react-native-svg": "^5.4.1",
+    "react-native-vector-icons": "^4.3.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   }
