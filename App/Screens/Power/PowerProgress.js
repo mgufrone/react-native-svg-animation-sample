@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { object, number } from 'prop-types';
+import { any, number } from 'prop-types';
 
 const styles = StyleSheet.create({
   timerContainer: {
@@ -49,7 +49,7 @@ export const PowerProgress = (props) => {
 
 PowerProgress.propTypes = {
   minutesLong: number.isRequired,
-  style: object,
+  style: any,
 };
 
 PowerProgress.defaultProps = {

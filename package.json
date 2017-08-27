@@ -36,6 +36,7 @@
     "react-native-circular-progress": "^0.0.8",
     "react-native-circular-slider": "^1.0.1",
     "react-native-easy-grid": "^0.1.15",
+    "react-native-pulse": "^1.0.5",
     "react-native-router-flux": "^4.0.0-beta.19",
     "react-native-svg": "^5.4.1",
     "react-native-vector-icons": "^4.3.0",
