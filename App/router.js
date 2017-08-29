@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StyleSheet, StatusBar, View, Platform } from 'react-native';
 import {
   Scene,
   Router,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabBarStyle: {
-    backgroundColor: '#eee',
+    backgroundColor: '#333',
   },
   tabBarSelectedItemStyle: {
     backgroundColor: '#ddd',
@@ -30,24 +30,47 @@ export const App = () => (
       barStyle="light-content"
     />
     <Router
+      hideNavBar
       tintColor="white"
       navigationBarStyle={{ backgroundColor: '#0a3678' }}
     >
-      <Stack key="root" hideNavBar>
+      <Stack key="root" hideNavBar hideTabBar>
         <Tabs
-          initial
           hideNavBar
           key="tabbar"
           gestureEnabled={false}
-          showLabel={false}
+          showLabel={Platform.OS === 'android'}
           tabs
           tabBarStyle={styles.tabBarStyle}
           activeBackgroundColor="white"
-          inactiveBackgroundColor="white"
+          inactiveBackgroundColor="red"
         >
-          <Scene initial key="tab1" component={PowerScreen} title="Tab #1" icon={PowerIcon} />
-          <Scene key="tab2" component={PowerScreen} title="Tab #2" icon={PowerIcon} />
-          <Scene key="tab3" component={PowerScreen} title="Tab #3" icon={PowerIcon} />
+          <Scene
+            hideTabBar
+            hideNavBar
+            tabBarLabel="TAB #1"
+            initial
+            key="tab1"
+            component={PowerScreen}
+            title="Tab #1"
+            icon={PowerIcon}
+          />
+          <Scene
+            key="tab2"
+            hideNavBar
+            tabBarLabel="TAB #1"
+            component={PowerScreen}
+            title="Tab #2"
+            icon={PowerIcon}
+          />
+          <Scene
+            tabBarLabel="TAB #1"
+            key="tab3"
+            hideNavBar
+            component={PowerScreen}
+            title="Tab #3"
+            icon={PowerIcon}
+          />
         </Tabs>
       </Stack>
     </Router>

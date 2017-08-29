@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
 export const PowerProgress = (props) => {
   const { minutesLong, ...rest } = props;
 
-  const hours = minutesLong.toFixed(2);
+  const watt = (minutesLong / 1000).toFixed(2);
 
   return (
     <View {...rest}>
       <View style={styles.timerContainer}>
-        <Text style={styles.time}>£{hours}</Text>
+        <Text style={styles.time}>£{watt}</Text>
         <Text style={styles.text}>/hr</Text>
       </View>
       <View style={styles.wattContainer}>
-        <Text style={[styles.text, styles.span]}>0.03 kW</Text>
+        <Text style={[styles.text, styles.span]}>{watt} kW</Text>
       </View>
     </View>
   );

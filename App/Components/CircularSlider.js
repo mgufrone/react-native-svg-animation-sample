@@ -110,7 +110,9 @@ export default class Slider extends CircularSlider {
             ##### Circle
           */}
 
-          <G transform={{ translate: `${(strokeWidth / 2) + radius + 1}, ${(strokeWidth / 2) + radius + 1}` }}>
+          <G
+            transform={{ translate: `${(strokeWidth / 2) + radius + 1}, ${(strokeWidth / 2) + radius + 1}` }}
+          >
             <Circle
               r={radius}
               strokeWidth={strokeWidth}
@@ -165,7 +167,6 @@ export default class Slider extends CircularSlider {
               fill={gradientColorFrom}
               transform={{ translate: `${start.fromX}, ${start.fromY}` }}
               onPressIn={() => this.onPressIn(startAngle, angleLength)}
-              {...this._sleepPanResponder.panHandlers}
             >
               <Circle
                 r={(strokeWidth - 1) / 2}

@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#fff',
   },
+  descriptionText: {
+    color: '#fff',
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  footer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -80,13 +89,16 @@ const styles = StyleSheet.create({
   },
 });
 
+function convertWattHour(length) {
+  return (length * 1000) / (Math.PI * 2);
+}
 
 export default class PowerScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       startAngle: 0,
-      angleLength: Math.PI * 1,
+      angleLength: (Math.PI * 1) * (100 / 1000),
     };
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -117,7 +129,7 @@ export default class PowerScreen extends Component {
         <View>
           <PowerProgress
             style={styles.sleepTimeContainer}
-            minutesLong={(angleLength)}
+            minutesLong={convertWattHour(angleLength)}
           />
           <CircularSlider
             startAngle={startAngle}
@@ -133,11 +145,13 @@ export default class PowerScreen extends Component {
             startIcon={null}
           />
         </View>
-        <View style={styles.description}>
-          <Text style={styles.descriptionText}>We are just connecting to your home</Text>
-        </View>
         <View style={styles.footer}>
-          <Text style={styles.title}>We are just connecting to your home</Text>
+          <View style={styles.description}>
+            <Text style={styles.descriptionText}>We are just connecting to your home</Text>
+          </View>
+          <TouchableOpacity style={styles.footerButton}>
+            <Icon name="chevron-down" size={20} color="#fff" />
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -151,5 +165,7 @@ PowerScreen.navigationOptions = ({ navigation }) => {
     headerRight: (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
       <Icon name="cog" size={25} color="#fff" />
     </TouchableOpacity>),
+    tabBarVisible: true,
+    tabBarPosition: 'bottom',
   };
 };
