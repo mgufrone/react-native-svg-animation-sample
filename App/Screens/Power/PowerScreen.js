@@ -147,7 +147,7 @@ export default class PowerScreen extends Component {
   }
 
   colorEnd() {
-    return this.colors[Math.ceil(convertWattHour(this.state.angleLength) / 10)];
+    return this.colors[Math.floor(convertWattHour(this.state.angleLength) / 10)];
   }
 
 
@@ -172,9 +172,9 @@ export default class PowerScreen extends Component {
             startAngle={startAngle}
             angleLength={angleLength}
             onUpdate={this.onUpdate}
-            segments={5}
+            segments={6}
             strokeWidth={40}
-            radius={130}
+            radius={120}
             gradientColorFrom="#509E2F"
             gradientColorTo={this.colorEnd()}
             bgCircleColor="#0A3678"
