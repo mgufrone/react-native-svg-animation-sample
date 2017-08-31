@@ -4,7 +4,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-} from 'react-native'; import Icon from 'react-native-vector-icons/FontAwesome';
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import CircularSlider from '../../Components/CircularSlider';
 import { PowerProgress } from './PowerProgress';
@@ -133,7 +135,7 @@ export default class PowerScreen extends Component {
     };
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
-    this.colors = interpolateColors(colorToDec('#509E2F'), colorToDec('#DA3E00'), 100);
+    this.colors = interpolateColors(colorToDec('#56AD32'), colorToDec('#FF4900'), 100);
   }
   onTimeUpdate(fromTimeInMinutes, minutesLong) {
     this.setState({ minutesLong });
@@ -172,10 +174,10 @@ export default class PowerScreen extends Component {
             startAngle={startAngle}
             angleLength={angleLength}
             onUpdate={this.onUpdate}
-            segments={6}
-            strokeWidth={40}
+            segments={Math.floor(convertWattHour(this.state.angleLength) / 10)}
+            strokeWidth={25}
             radius={120}
-            gradientColorFrom="#509E2F"
+            gradientColorFrom="#56AD32"
             gradientColorTo={this.colorEnd()}
             bgCircleColor="#0A3678"
             stopIcon={null}
