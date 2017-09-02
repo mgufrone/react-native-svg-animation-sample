@@ -88,7 +88,7 @@ export default class Slider extends CircularSlider {
               fill="transparent"
               stroke={bgCircleColor}
             />
-            {
+            {segments > 0 &&
               range(6).map((i) => {
                 const {
                   fromX,
@@ -135,7 +135,7 @@ export default class Slider extends CircularSlider {
               ##### Stop Icon
             */}
 
-            <G
+            {segments > 0 && <G
               fill={highestColor}
               transform={{ translate: `${highestStop.toX}, ${highestStop.toY}` }}
             >
@@ -145,8 +145,8 @@ export default class Slider extends CircularSlider {
               {
                 stopIcon
               }
-            </G>
-            <G
+            </G>}
+            {segments > 0 && <G
               fill={gradientColorTo}
               transform={{ translate: `${stop.toX}, ${stop.toY}` }}
             >
@@ -156,13 +156,13 @@ export default class Slider extends CircularSlider {
               {
                 stopIcon
               }
-            </G>
+            </G>}
 
             {/*
               ##### Start Icon
             */}
 
-            <G
+            {segments > 0 && <G
               fill={gradientColorFrom}
               transform={{ translate: `${start.fromX}, ${start.fromY}` }}
               onPressIn={() => this.onPressIn(startAngle, angleLength)}
@@ -173,7 +173,7 @@ export default class Slider extends CircularSlider {
               {
                 startIcon
               }
-            </G>
+            </G>}
           </G>
         </Svg>
       </View>

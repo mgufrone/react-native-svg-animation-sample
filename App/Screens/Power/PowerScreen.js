@@ -8,11 +8,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { convertWattHour, interpolateColors, colorToDec } from '../../Utils/helper';
+import { AnimatedPowerStats, PowerStats } from './PowerStats';
 
-import CircularSlider from '../../Components/CircularSlider';
-import { PowerProgress } from './PowerProgress';
-
-const AnimatedCircularSlider = Animated.createAnimatedComponent(CircularSlider);
 const styles = StyleSheet.create({
   title: {
     fontSize: 30,
@@ -93,40 +91,6 @@ const styles = StyleSheet.create({
   },
 });
 
-function convertWattHour(length) {
-  return (length * 1000) / (Math.PI * 2);
-}
-
-function toColor(dec) {
-  return `#${(dec).toString(16)}`;
-}
-
-function colorToDec(hex) {
-  return parseInt(hex.replace('#', '0x'), 0);
-}
-function interpolate(begin, end, step, max) {
-  if (begin < end) {
-    return ((end - begin) * (step / max)) + begin;
-  }
-  return ((begin - end) * (1 - (step / max))) + end;
-}
-function toRgb(hex) {
-  return {
-    r: (hex & 0xff0000) >> 16,
-    g: (hex & 0x00ff00) >> 8,
-    b: (hex & 0x0000ff) >> 0,
-  };
-}
-function interpolateColors(begin, end, steps) {
-  const { r: r1, g: g1, b: b1 } = toRgb(begin);
-  const { r: r2, g: g2, b: b2 } = toRgb(end);
-  return new Array(steps).fill().map((_, step) => {
-    const newR = Math.ceil(interpolate(r1, r2, step, steps));
-    const newG = Math.ceil(interpolate(g1, g2, step, steps));
-    const newB = Math.ceil(interpolate(b1, b2, step, steps));
-    return `rgb(${newR}, ${newG}, ${newB})`;
-  });
-}
 
 export default class PowerScreen extends Component {
   constructor(props) {
@@ -135,15 +99,25 @@ export default class PowerScreen extends Component {
       startAngle: 0,
       angleLength: (Math.PI * 2) * (100 / 1000),
       animation: new Animated.Value(0),
+      highestAnimation: new Animated.Value(0),
+      maxProgress: (Math.PI * 2) * (600 / 1000),
     };
-    this.state.animation.addListener((value) => {
-      this._slider.setNativeProps({ angleLength: parseInt(value.value, 0) });
-    });
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.colors = interpolateColors(colorToDec('#56AD32'), colorToDec('#FF4900'), 100);
+    this.startTimer = null;
   }
   componentDidMount() {
+    setTimeout(() => {
+      Animated.timing(this.state.highestAnimation, {
+        toValue: (Math.PI * 2) * 0.75,
+        duration: 2 * 1000,
+      }).start();
+      Animated.timing(this.state.animation, {
+        toValue: (Math.PI * 2) * 0.6,
+        duration: 2 * 1000,
+      }).start();
+    }, 1 * 1000);
   }
   onTimeUpdate(fromTimeInMinutes, minutesLong) {
     this.setState({ minutesLong });
@@ -156,13 +130,13 @@ export default class PowerScreen extends Component {
     });
   }
 
-  colorEnd() {
-    return this.colors[Math.floor(convertWattHour(this.state.angleLength) / 10)];
+  colorEnd(index) {
+    return this.colors[index];
   }
 
 
   render() {
-    const { angleLength, startAngle } = this.state;
+    const { startAngle } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -174,25 +148,18 @@ export default class PowerScreen extends Component {
           </View>
         </View>
         <View>
-          <PowerProgress
-            style={styles.sleepTimeContainer}
-            minutesLong={convertWattHour(angleLength)}
-          />
-          <AnimatedCircularSlider
-            ref={(ref) => { this._slider = ref; }}
+          <AnimatedPowerStats
+            textContainerStyle={styles.sleepTimeContainer}
             startAngle={startAngle}
-            angleLength={angleLength}
-            highestLength={(Math.PI * 2) * 0.75}
+            highestLength={this.state.highestAnimation}
             highestColor={'#425d8c'}
-            onUpdate={this.onUpdate}
-            segments={Math.floor(convertWattHour(this.state.angleLength) / 20)}
-            strokeWidth={25}
+            onUpdate={() => {}}
             radius={120}
-            gradientColorFrom="#56AD32"
-            gradientColorTo={this.colorEnd()}
+            strokeWidth={25}
+            angleLength={this.state.animation}
+            startColor="#56AD32"
+            endColor={index => this.colorEnd(index)}
             bgCircleColor="#0A3678"
-            stopIcon={null}
-            startIcon={null}
           />
         </View>
         <View style={styles.footer}>
