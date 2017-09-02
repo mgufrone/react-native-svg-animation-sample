@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Animated,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CircularSlider from '../../Components/CircularSlider';
 import { PowerProgress } from './PowerProgress';
 
+const AnimatedCircularSlider = Animated.createAnimatedComponent(CircularSlider);
 const styles = StyleSheet.create({
   title: {
     fontSize: 30,
@@ -132,10 +134,16 @@ export default class PowerScreen extends Component {
     this.state = {
       startAngle: 0,
       angleLength: (Math.PI * 2) * (100 / 1000),
+      animation: new Animated.Value(0),
     };
+    this.state.animation.addListener((value) => {
+      this._slider.setNativeProps({ angleLength: parseInt(value.value, 0) });
+    });
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.colors = interpolateColors(colorToDec('#56AD32'), colorToDec('#FF4900'), 100);
+  }
+  componentDidMount() {
   }
   onTimeUpdate(fromTimeInMinutes, minutesLong) {
     this.setState({ minutesLong });
@@ -170,11 +178,14 @@ export default class PowerScreen extends Component {
             style={styles.sleepTimeContainer}
             minutesLong={convertWattHour(angleLength)}
           />
-          <CircularSlider
+          <AnimatedCircularSlider
+            ref={(ref) => { this._slider = ref; }}
             startAngle={startAngle}
             angleLength={angleLength}
+            highestLength={(Math.PI * 2) * 0.75}
+            highestColor={'#425d8c'}
             onUpdate={this.onUpdate}
-            segments={Math.floor(convertWattHour(this.state.angleLength) / 10)}
+            segments={Math.floor(convertWattHour(this.state.angleLength) / 20)}
             strokeWidth={25}
             radius={120}
             gradientColorFrom="#56AD32"

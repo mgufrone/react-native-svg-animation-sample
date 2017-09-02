@@ -34,7 +34,7 @@ export const App = () => (
       tintColor="white"
       navigationBarStyle={{ backgroundColor: '#0a3678' }}
     >
-      <Stack key="root" hideNavBar hideTabBar>
+      <Stack key="root" hideNavBar>
         <Tabs
           hideNavBar
           key="tabbar"
@@ -43,10 +43,9 @@ export const App = () => (
           tabs
           tabBarStyle={styles.tabBarStyle}
           activeBackgroundColor="white"
-          inactiveBackgroundColor="red"
+          inactiveBackgroundColor="white"
         >
           <Scene
-            hideTabBar
             hideNavBar
             tabBarLabel="TAB #1"
             initial
