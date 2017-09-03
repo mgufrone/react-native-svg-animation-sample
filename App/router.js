@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View, Platform } from 'react-native';
+import { StyleSheet, StatusBar, View, Platform, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Scene,
   Router,
+  Overlay,
   Tabs,
   Stack,
 } from 'react-native-router-flux';
@@ -34,44 +36,32 @@ export const App = () => (
       tintColor="white"
       navigationBarStyle={{ backgroundColor: '#0a3678' }}
     >
-      <Stack key="root" hideNavBar>
-        <Tabs
-          hideNavBar
-          key="tabbar"
-          gestureEnabled={false}
-          showLabel={Platform.OS === 'android'}
-          tabs
-          tabBarStyle={styles.tabBarStyle}
-          activeBackgroundColor="white"
-          inactiveBackgroundColor="white"
-        >
-          <Scene
-            hideNavBar
-            tabBarLabel="TAB #1"
-            initial
-            key="tab1"
-            component={PowerScreen}
-            title="Tab #1"
-            icon={PowerIcon}
-          />
-          <Scene
-            key="tab2"
-            hideNavBar
-            tabBarLabel="TAB #1"
-            component={PowerScreen}
-            title="Tab #2"
-            icon={PowerIcon}
-          />
-          <Scene
-            tabBarLabel="TAB #1"
-            key="tab3"
-            hideNavBar
-            component={PowerScreen}
-            title="Tab #3"
-            icon={PowerIcon}
-          />
-        </Tabs>
-      </Stack>
+      <Overlay>
+        <Stack key="root" hideNavBar hideTabBar>
+          <Tabs
+            key="tabbar"
+            gestureEnabled={false}
+            showLabel={false}
+            tabs
+            tabBarStyle={styles.tabBarStyle}
+            activeBackgroundColor="white"
+            inactiveBackgroundColor="red"
+          >
+            <Scene
+              key="tab1"
+              initial
+              title=""
+              tabBarLabel="Live"
+              icon={PowerIcon}
+              component={PowerScreen}
+              iconName={'cog'}
+              renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
+                <Icon name="cog" size={25} color="#fff" />
+              </TouchableOpacity>)}
+            />
+          </Tabs>
+        </Stack>
+      </Overlay>
     </Router>
   </View>
 );

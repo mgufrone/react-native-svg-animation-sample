@@ -1,96 +1,17 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Animated,
+  Easing,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { convertWattHour, interpolateColors, colorToDec } from '../../Utils/helper';
-import { AnimatedPowerStats, PowerStats } from './PowerStats';
+import { interpolateColors, colorToDec } from '../../Utils/helper';
+import { AnimatedPowerStats } from './PowerStats';
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 30,
-    color: '#fff',
-  },
-  descriptionText: {
-    color: '#fff',
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  footer: {
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#082e66',
-  },
-  bedtimeText: {
-    color: '#ff9800',
-    marginLeft: 3,
-    fontSize: 16,
-  },
-  wakeText: {
-    color: '#ffcf00',
-    marginLeft: 3,
-    fontSize: 16,
-  },
-  timeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  time: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  timeHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  timeValue: {
-    color: 'white',
-    fontSize: 35,
-    fontWeight: '300',
-  },
-  sleepTimeContainer: {
-    backgroundColor: '#072859',
-    borderRadius: 600,
-    flex: 1,
-    justifyContent: 'center',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  redDot: {
-    backgroundColor: 'rgba(255, 0, 0, 0.5)',
-    width: 15,
-    height: 15,
-    borderRadius: 10,
-  },
-  redDotContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 30,
-    height: 30,
-    marginRight: 10,
-  },
-  headerContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
+import styles from './Styles/PowerScreenStyles';
 
 export default class PowerScreen extends Component {
   constructor(props) {
@@ -100,6 +21,7 @@ export default class PowerScreen extends Component {
       angleLength: (Math.PI * 2) * (100 / 1000),
       animation: new Animated.Value(0),
       highestAnimation: new Animated.Value(0),
+      connectingCircle: new Animated.Value(0),
       maxProgress: (Math.PI * 2) * (600 / 1000),
     };
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
@@ -108,17 +30,38 @@ export default class PowerScreen extends Component {
     this.startTimer = null;
   }
   componentDidMount() {
-    setTimeout(() => {
-      Animated.timing(this.state.highestAnimation, {
-        toValue: (Math.PI * 2) * 0.75,
-        duration: 2 * 1000,
-      }).start();
-      Animated.timing(this.state.animation, {
-        toValue: (Math.PI * 2) * 0.6,
-        duration: 2 * 1000,
-      }).start();
-    }, 1 * 1000);
+    this.animateConnectingCircle();
   }
+  componentWillReceiveProps(props) {
+    if (props.isConnecting !== this.props.isConnecting) {
+      setTimeout(() => {
+        Animated.timing(this.state.highestAnimation, {
+          toValue: (Math.PI * 2) * (props.highestWattConsumption / 1000),
+          duration: 0.5 * 1000,
+        }).start();
+        Animated.timing(this.state.animation, {
+          toValue: (Math.PI * 2) * (props.wattConsumption / 1000),
+          duration: 0.5 * 1000,
+        }).start();
+      }, 1000);
+    }
+  }
+
+  animateConnectingCircle() {
+    if (this.props.isConnecting) {
+      Animated.timing(this.state.connectingCircle, {
+        toValue: (Math.PI * 2),
+        duration: 1 * 1000,
+        easing: Easing.inOut(Easing.quad),
+      }).start(() => {
+        this.state.connectingCircle.setValue(0);
+        setTimeout(() => {
+          this.animateConnectingCircle();
+        }, 5 * 100);
+      });
+    }
+  }
+
   onTimeUpdate(fromTimeInMinutes, minutesLong) {
     this.setState({ minutesLong });
   }
@@ -134,17 +77,38 @@ export default class PowerScreen extends Component {
     return this.colors[index];
   }
 
+  fullCircle(slice = 1) {
+    return (Math.PI * 2) * slice;
+  }
+
+  getText() {
+    const { isConnecting, wattConsumption } = this.props;
+    if (isConnecting) {
+      return 'Connecting';
+    }
+    switch (true) {
+      case wattConsumption >= 0 && wattConsumption <= 200:
+        return 'Rested State';
+      default:
+        return 'Your Live Energy';
+    }
+  }
 
   render() {
     const { startAngle } = this.state;
+
+    const backgroundColor = this.state.animation.interpolate({
+      inputRange: [0, this.fullCircle(0.2), this.fullCircle(0.5), this.fullCircle()],
+      outputRange: ['rgb(8,46,102)', 'rgb(5,29,64)', 'rgb(5,29,64)', 'rgb(8,46,102)'],
+    });
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { backgroundColor }]}>
         <View style={styles.headerContainer}>
           <View style={styles.redDotContainer}>
             <View style={styles.redDot} />
           </View>
           <View>
-            <Text style={styles.title}>Connecting</Text>
+            <Text style={styles.title}>{this.getText()}</Text>
           </View>
         </View>
         <View>
@@ -153,6 +117,8 @@ export default class PowerScreen extends Component {
             startAngle={startAngle}
             highestLength={this.state.highestAnimation}
             highestColor={'#425d8c'}
+            connectingAngle={this.state.connectingCircle}
+            isConnecting={this.props.isConnecting}
             onUpdate={() => {}}
             radius={120}
             strokeWidth={25}
@@ -170,19 +136,7 @@ export default class PowerScreen extends Component {
             <Icon name="chevron-down" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     );
   }
 }
-
-PowerScreen.navigationOptions = ({ navigation }) => {
-  const { state, setParams } = navigation;
-  return {
-    title: '',
-    headerRight: (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
-      <Icon name="cog" size={25} color="#fff" />
-    </TouchableOpacity>),
-    tabBarVisible: true,
-    tabBarPosition: 'bottom',
-  };
-};

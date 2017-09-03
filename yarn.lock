@@ -3949,9 +3949,9 @@ react-native-pulse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.5.tgz#26c020641e55fd47c3d80f9bda6bab24e9fefbb5"
 
-react-native-router-flux@^4.0.0-beta.19:
-  version "4.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.19.tgz#cf7a0cbde42e7317939e2b15f663ff832c2b6da6"
+react-native-router-flux@^4.0.0-beta.21:
+  version "4.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.21.tgz#cdbb3cec5b18fab0ffdb8abf38ce790749f625d0"
   dependencies:
     lodash.isequal "^4.5.0"
     mobx "^3.1.16"

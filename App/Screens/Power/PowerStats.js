@@ -14,6 +14,8 @@ export default class PowerStats extends Component {
       textContainerStyle,
       angleLength,
       highestLength,
+      connectingAngle,
+      isConnecting,
       startColor,
       endColor,
       onUpdate,
@@ -29,11 +31,7 @@ export default class PowerStats extends Component {
           minutesLong={convertWattHour(angleLength)}
         />
         <CircularSlider
-          startAngle={startAngle}
-          angleLength={angleLength}
-          highestLength={highestLength}
-          highestColor={highestColor}
-          onUpdate={onUpdate}
+          {...this.props}
           segments={Math.floor(convertWattHour(angleLength) / 20)}
           strokeWidth={strokeWidth}
           radius={radius}

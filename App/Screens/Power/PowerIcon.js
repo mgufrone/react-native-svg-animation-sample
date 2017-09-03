@@ -1,26 +1,25 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { Text } from 'react-native';
-import CircularSlider from '../../Components/CircularSlider';
+import { Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export const PowerIcon = props => (<Text
-  style={{ color: props.focused ? 'red' : 'black' }}
->
-  <CircularSlider
-    startAngle={0}
-    angleLength={3.14}
-    onUpdate={this.onUpdate}
-    segments={1}
-    strokeWidth={1}
-    radius={2}
-    gradientColorFrom="#DA3E00"
-    gradientColorTo="#DA3E00"
-  />
-  {props.title}
-</Text>);
+export const PowerIcon = (props) => {
+  const color = props.focused ? '#333' : '#333';
+  return (
+    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', alignSelf: 'center', justifyContent: 'center' }}>
+      <Icon style={{ color }} name={props.iconName} size={18} />
+      <Text style={{ color, fontSize: 12 }}>{props.tabBarLabel}</Text>
+    </View>
+  );
+};
 
 PowerIcon.propTypes = {
   focused: bool.isRequired,
+  iconName: string,
   title: string.isRequired,
+  tabBarLabel: string.isRequired,
+};
+PowerIcon.defaultProps = {
+  iconName: 'circle',
 };
 export default PowerIcon;
