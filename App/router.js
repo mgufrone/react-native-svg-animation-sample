@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, StatusBar, View, Platform, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RoundIcon from './Components/RoundIcon';
 import {
   Scene,
   Router,
@@ -53,6 +54,7 @@ export const App = () => (
               title=""
               tabBarLabel="Live"
               icon={PowerIcon}
+              iconComponent={props => <RoundIcon startAngle={0} angleLength={0} radius={8} strokeWidth={6} onUpdate={() => {}} highestLength={75} strokeColor={props.color} />}
               component={PowerScreen}
               iconName={'cog'}
               renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>

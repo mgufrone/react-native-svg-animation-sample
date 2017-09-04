@@ -10,14 +10,14 @@ class PowerComponent extends React.Component {
     super(...args);
     this.state = {
       connecting: true,
-      wattConsumption: 100,
+      wattConsumption: 5 * 100,
       highestWattConsumption: 8 * 100,
     };
   }
   componentDidMount() {
     setTimeout(() => {
       this.setState({ connecting: false });
-    }, 5 * 1000);
+    }, 3.5 * 1000);
   }
   render() {
     return (

@@ -14,6 +14,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
+  footerButton: {
+    alignItems: 'center',
+  },
+  footerButtonText: {
+    fontSize: 11,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -60,7 +68,7 @@ export default StyleSheet.create({
     right: 0,
   },
   redDot: {
-    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+    backgroundColor: '#f02929',
     width: 15,
     height: 15,
     borderRadius: 10,

@@ -29,7 +29,9 @@ export default class Slider extends CircularSlider {
       Animated.timing(this.state.opacity, {
         toValue: props.isConnecting ? 100 : 0,
         duration: 250,
-      }).start();
+      }).start(() => {
+        this.setState({ isConnecting: props.isConnecting });
+      });
     }
   }
   render() {
@@ -133,6 +135,21 @@ export default class Slider extends CircularSlider {
                 );
               })
             }
+            {/*
+              ##### Stop Icon
+            */}
+
+            {segments > 0 && <G
+              fill={highestColor}
+              transform={{ translate: `${highestStop.toX}, ${highestStop.toY}` }}
+            >
+              <Circle
+                r={(strokeWidth - 1) / 2}
+              />
+              {
+                stopIcon
+              }
+            </G>}
             {
               range(segments).map((i) => {
                 const {
@@ -155,21 +172,6 @@ export default class Slider extends CircularSlider {
               })
             }
 
-            {/*
-              ##### Stop Icon
-            */}
-
-            {segments > 0 && <G
-              fill={highestColor}
-              transform={{ translate: `${highestStop.toX}, ${highestStop.toY}` }}
-            >
-              <Circle
-                r={(strokeWidth - 1) / 2}
-              />
-              {
-                stopIcon
-              }
-            </G>}
             {segments > 0 && <G
               fill={gradientColorTo}
               transform={{ translate: `${stop.toX}, ${stop.toY}` }}

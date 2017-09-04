@@ -4,10 +4,10 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const PowerIcon = (props) => {
-  const color = props.focused ? '#333' : '#333';
+  const color = props.focused ? '#d93d00' : '#333';
   return (
     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', alignSelf: 'center', justifyContent: 'center' }}>
-      <Icon style={{ color }} name={props.iconName} size={18} />
+      {props.iconComponent && <props.iconComponent color={color} />}
       <Text style={{ color, fontSize: 12 }}>{props.tabBarLabel}</Text>
     </View>
   );

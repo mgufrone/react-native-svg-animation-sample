@@ -7,11 +7,27 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 import { interpolateColors, colorToDec } from '../../Utils/helper';
 import { AnimatedPowerStats } from './PowerStats';
 
 import styles from './Styles/PowerScreenStyles';
+
+const AnimatedTouchable = Animatable.createAnimatableComponent(TouchableOpacity);
+Animatable.initializeRegistryWithDefinitions({
+  fadeInOut: {
+    0: {
+      opacity: 1,
+    },
+    0.5: {
+      opacity: 0,
+    },
+    1: {
+      opacity: 1,
+    },
+  },
+});
 
 export default class PowerScreen extends Component {
   constructor(props) {
@@ -99,13 +115,18 @@ export default class PowerScreen extends Component {
 
     const backgroundColor = this.state.animation.interpolate({
       inputRange: [0, this.fullCircle(0.2), this.fullCircle(0.5), this.fullCircle()],
-      outputRange: ['rgb(8,46,102)', 'rgb(5,29,64)', 'rgb(5,29,64)', 'rgb(8,46,102)'],
+      outputRange: ['rgb(8,46,102)', 'rgb(5,29,64)', 'rgb(8,46,102)', 'rgb(8,46,102)'],
     });
     return (
       <Animated.View style={[styles.container, { backgroundColor }]}>
         <View style={styles.headerContainer}>
           <View style={styles.redDotContainer}>
-            <View style={styles.redDot} />
+            <Animatable.View
+              animation="fadeInOut"
+              iterationCount={'infinite'}
+              duration={2 * 1000}
+              style={styles.redDot}
+            />
           </View>
           <View>
             <Text style={styles.title}>{this.getText()}</Text>
@@ -132,9 +153,14 @@ export default class PowerScreen extends Component {
           <View style={styles.description}>
             <Text style={styles.descriptionText}>We are just connecting to your home</Text>
           </View>
-          <TouchableOpacity style={styles.footerButton}>
-            <Icon name="chevron-down" size={20} color="#fff" />
-          </TouchableOpacity>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Animatable.View animation="pulse" iterationCount={'infinite'} direction="alternate">
+              <TouchableOpacity style={styles.footerButton}>
+                <Text style={styles.footerButtonText}>Energy Used Today</Text>
+                <Icon name="chevron-down" size={15} color="#fff" />
+              </TouchableOpacity>
+            </Animatable.View>
+          </View>
         </View>
       </Animated.View>
     );
