@@ -14,7 +14,6 @@ import { AnimatedPowerStats } from './PowerStats';
 
 import styles from './Styles/PowerScreenStyles';
 
-const AnimatedTouchable = Animatable.createAnimatableComponent(TouchableOpacity);
 Animatable.initializeRegistryWithDefinitions({
   fadeInOut: {
     0: {

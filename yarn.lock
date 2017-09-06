@@ -3945,6 +3945,12 @@ react-native-easy-grid@^0.1.15:
   dependencies:
     lodash "^4.11.1"
 
+react-native-linear-gradient@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.3.0.tgz#757997197e35edf52e290891a11566e462845da1"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-pulse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.5.tgz#26c020641e55fd47c3d80f9bda6bab24e9fefbb5"
@@ -3960,6 +3966,10 @@ react-native-router-flux@^4.0.0-beta.21:
     prop-types "^15.5.10"
     react-native-button "^2.0.0"
     react-navigation "^1.0.0-beta.11"
+
+react-native-shadow@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-shadow/-/react-native-shadow-1.2.1.tgz#cff9295363097f534c32c2b43c753261334cb43a"
 
 react-native-svg@>=4.3.3, react-native-svg@^5.4.1:
   version "5.4.1"

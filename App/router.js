@@ -10,6 +10,7 @@ import {
   Stack,
 } from 'react-native-router-flux';
 import { PowerScreen, PowerIcon } from './Screens/Power';
+import { TemperatureScreen } from './Screens/Temperature';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
 export const App = () => (
   <View style={{ flex: 1 }}>
     <StatusBar
-      backgroundColor="blue"
+      backgroundColor="#333"
       barStyle="light-content"
     />
     <Router
@@ -39,29 +40,16 @@ export const App = () => (
     >
       <Overlay>
         <Stack key="root" hideNavBar hideTabBar>
-          <Tabs
-            key="tabbar"
-            gestureEnabled={false}
-            showLabel={false}
-            tabs
-            tabBarStyle={styles.tabBarStyle}
-            activeBackgroundColor="white"
-            inactiveBackgroundColor="red"
-          >
-            <Scene
-              key="tab1"
-              initial
-              title=""
-              tabBarLabel="Live"
-              icon={PowerIcon}
-              iconComponent={props => <RoundIcon startAngle={0} angleLength={0} radius={8} strokeWidth={6} onUpdate={() => {}} highestLength={75} strokeColor={props.color} />}
-              component={PowerScreen}
-              iconName={'cog'}
-              renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
-                <Icon name="cog" size={25} color="#fff" />
-              </TouchableOpacity>)}
-            />
-          </Tabs>
+          <Scene
+            key="tab1"
+            initial
+            title=""
+            component={TemperatureScreen}
+            iconName={'cog'}
+            renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
+              <Icon name="cog" size={25} color="#fff" />
+            </TouchableOpacity>)}
+          />
         </Stack>
       </Overlay>
     </Router>
