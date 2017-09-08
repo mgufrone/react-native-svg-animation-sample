@@ -99,6 +99,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.facebook.react/react-native/0.47.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/power/react-native-linear-gradient/unspecified/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/power/react-native-material-kit/unspecified/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/power/react-native-svg/unspecified/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/power/react-native-vector-icons/unspecified/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
@@ -141,7 +145,13 @@
     <orderEntry type="library" exported="" name="support-media-compat-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.0.1" level="project" />
+    <orderEntry type="module" module-name="react-native-material-kit" exported="" />
+    <orderEntry type="module" module-name="react-native-linear-gradient" exported="" />
     <orderEntry type="module" module-name="react-native-vector-icons" exported="" />
     <orderEntry type="module" module-name="react-native-svg" exported="" />
+    <orderEntry type="library" exported="" name="react-native-material-kit-unspecified" level="project" />
+    <orderEntry type="library" exported="" name="react-native-linear-gradient-unspecified" level="project" />
+    <orderEntry type="library" exported="" name="react-native-vector-icons-unspecified" level="project" />
+    <orderEntry type="library" exported="" name="react-native-svg-unspecified" level="project" />
   </component>
 </module>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text as TextNative } from 'react-native';
+import { View, Text as TextNative, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Svg, {
   Path,
@@ -12,6 +12,7 @@ import Svg, {
   Stop,
   G,
 } from 'react-native-svg';
+import { Button } from 'react-native-elements';
 import { WaterDrop } from '../../Icons/WaterDrop';
 
 export default class TemperatureScreen extends React.Component {
@@ -27,7 +28,7 @@ export default class TemperatureScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Svg style={{ flex: 8, alignItems: 'flex-start', justifyContent: 'flex-start' }} viewBox="0 0 400 500" preserveAspectRatio={'align slice'} >
+        <Svg style={{ flex: 7, alignItems: 'flex-start', justifyContent: 'flex-start' }} viewBox="0 0 400 550" preserveAspectRatio={'align slice'} >
           <Defs>
             <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="200">
               <Stop offset="0" stopColor="rgb(255,255,255)" stopOpacity="0.1" />
@@ -52,8 +53,75 @@ export default class TemperatureScreen extends React.Component {
             </Text>
           </G>
         </Svg>
-        <View style={{ flex: 4 }}>
-          <TextNative>Lower Part</TextNative>
+        <View style={{ flex: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <TextNative>HOME</TextNative>
+            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 8 }}>
+              <TouchableOpacity style={{
+                width: 60, alignItems: 'center', justifyContent: 'center', height: 60, padding: 10, backgroundColor: '#fff', borderRadius: 60, elevation: 5, shadowColor: 'rgba(0,0,0,0.3)', shadowOffset: { width: 0, height: 10 }, shadowRadius: 60 }}
+              >
+                <Icon name="home" color="#91a8b5" size={40} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{ marginLeft: 20, marginRight: 20 }}>
+            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 10 }}>
+              <TouchableOpacity style={{
+                width: 60,
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 60,
+                padding: 10,
+                backgroundColor: '#fff',
+                borderRadius: 60,
+                elevation: 5,
+                shadowColor: 'rgba(0,0,0,0.3)',
+                shadowOffset: { width: 0, height: 10 },
+                shadowRadius: 60,
+                marginBottom: 20,
+              }}
+              >
+                <Icon name="plus" color="#91a8b5" size={40} />
+              </TouchableOpacity>
+              <TouchableOpacity style={{
+                width: 60,
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 60,
+                padding: 10,
+                backgroundColor: '#fff',
+                borderRadius: 60,
+                elevation: 5,
+                shadowColor: 'rgba(0,0,0,0.3)',
+                shadowOffset: { width: 0, height: 10 },
+                shadowRadius: 60,
+              }}
+              >
+                <Icon name="minus" color="#91a8b5" size={40} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TextNative>AWAY</TextNative>
+            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 8 }}>
+              <TouchableOpacity
+                style={{
+                  width: 60,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: 60,
+                  padding: 10,
+                  backgroundColor: '#fff',
+                  borderRadius: 60,
+                  elevation: 5,
+                  shadowColor: 'rgba(0,0,0,0.3)',
+                  shadowOffset: { width: 0, height: 10 },
+                  shadowRadius: 60 }}
+              >
+                <Icon name="leaf" color="#91a8b5" size={40} />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     );
