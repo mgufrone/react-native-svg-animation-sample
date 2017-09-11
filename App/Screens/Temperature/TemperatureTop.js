@@ -92,6 +92,18 @@ export default class TemperatureTop extends React.Component {
           <Stop offset="0.5" stopColor="rgb(255,255,255)" stopOpacity="0.1" />
           <Stop offset="1" stopColor="rgb(255,255,255)" stopOpacity="0.05" />
         </LinearGradient>
+        <LinearGradient id="circleGradCool" x1="0" y1="0" x2="0" y2="50">
+          <Stop offset="0" stopColor="#439df7" />
+          <Stop offset="1" stopColor="#4ab2f7" />
+        </LinearGradient>
+        <LinearGradient id="circleGradHeat" x1="0" y1="0" x2="0" y2="50">
+          <Stop offset="0" stopColor="#439df7" />
+          <Stop offset="1" stopColor="#4ab2f7" />
+        </LinearGradient>
+        <LinearGradient id="circleStroke" x1="20" y1="0" x2="0" y2="50">
+          <Stop offset="0" stopColor="#e6e6e6" stopOpacity="1" />
+          <Stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </LinearGradient>
       </Defs>
       <WaterDrop fill={'#fff'} id="WaterDrop" />
       <Flame fill={'#fff'} opacity={opacityFlame} id="Flame" />
@@ -120,6 +132,21 @@ export default class TemperatureTop extends React.Component {
           {this.labelState()} {this.props.currentTemperature}&deg;
         </Text>
         <AnimatedTemperatureComponent temperature={this.state.temperatureAnimation} textAnchor="middle" x="200" y="100" fill="white" font={{ fontFamily: 'Roboto-Thin', fontSize: 150 }} style={{ color: '#fff', fontFamily: 'Roboto' }} />
+        <G x="340" y="350">
+          <Circle
+            fill="url(#circleStroke)"
+            cx="0"
+            cy="0"
+            r="20"
+          />
+          <Circle
+            fill={`url(#${(this.props.currentTemperature > 25 ? 'circleGradHeat' : 'circleGradCool')})`}
+            cx="0"
+            cy="0"
+            r="16"
+          />
+          <Text x="-11" y="-11" fill="#fff">{this.props.currentTemperature}&deg;</Text>
+        </G>
       </G>
     </Svg>
     );

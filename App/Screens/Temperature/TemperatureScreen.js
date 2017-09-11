@@ -32,14 +32,14 @@ export default class TemperatureScreen extends React.Component {
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <View style={{ flex: 7 }}>
           <TemperatureTop currentTemperature={this.state.currentTemperature} />
         </View>
         <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <TextNative>HOME</TextNative>
-            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 8 }}>
+            <View style={{ borderRadius: 60, backgroundColor: '#f5f7fa', padding: 8 }}>
               <TouchableOpacity style={{
                 width: 60, alignItems: 'center', justifyContent: 'center', height: 60, padding: 10, backgroundColor: '#fff', borderRadius: 60, elevation: 5, shadowColor: 'rgba(0,0,0,0.3)', shadowOffset: { width: 0, height: 10 }, shadowRadius: 60 }}
               >
@@ -48,7 +48,7 @@ export default class TemperatureScreen extends React.Component {
             </View>
           </View>
           <View style={{ marginLeft: 20, marginRight: 20 }}>
-            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 10 }}>
+            <View style={{ borderRadius: 60, backgroundColor: '#f5f7fa', padding: 10 }}>
               <TouchableOpacity
                 onPress={this.increaseTemperature}
                 style={{
@@ -60,8 +60,8 @@ export default class TemperatureScreen extends React.Component {
                   backgroundColor: '#fff',
                   borderRadius: 60,
                   elevation: 5,
-                  shadowColor: 'rgba(0,0,0,0.3)',
-                  shadowOffset: { width: 0, height: 10 },
+                  shadowColor: 'rgb(0,0,0)',
+                  shadowOffset: { width: 0, height: 0 },
                   shadowRadius: 60,
                   marginBottom: 40,
                 }}
@@ -90,7 +90,7 @@ export default class TemperatureScreen extends React.Component {
           </View>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TextNative>AWAY</TextNative>
-            <View style={{ borderRadius: 60, backgroundColor: 'rgba(0,0,0,0.05)', padding: 8 }}>
+            <View style={{ borderRadius: 60, backgroundColor: '#f5f7fa', padding: 8 }}>
               <TouchableOpacity
                 style={{
                   width: 60,
