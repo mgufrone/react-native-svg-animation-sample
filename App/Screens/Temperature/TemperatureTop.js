@@ -17,7 +17,7 @@ import { AnimatedSnowflake as Snowflake } from '../../Icons/Snowflake';
 import { AnimatedFlame as Flame } from '../../Icons/Flame';
 import { AnimatedG } from '../../Components/AnimatedG';
 
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 
 export default class TemperatureTop extends React.Component {
@@ -28,6 +28,7 @@ export default class TemperatureTop extends React.Component {
       temperatureAnimation: new Animated.Value(props.currentTemperature),
       opacityAnimation: new Animated.Value(0),
       colorAnimation: new Animated.Value(0),
+      opacityState: new Animated.Value(0),
     };
     this.interval = null;
   }
@@ -43,6 +44,10 @@ export default class TemperatureTop extends React.Component {
     return temperature < 25 ? 'rgb(69,157,245)' : 'rgb(247,163,67)';
   }
   changeTemperature(temperature) {
+    Animated.timing(this.state.opacityState, {
+      toValue: 1,
+      duration: 0.5 * 1000,
+    }).start();
     if (this.interval) {
       clearTimeout(this.interval);
     }
@@ -58,7 +63,12 @@ export default class TemperatureTop extends React.Component {
           easing: Easing.easeInOut,
         }),
       ];
-      Animated.parallel(parallels).start();
+      Animated.parallel(parallels).start(() => {
+        Animated.timing(this.state.opacityState, {
+          toValue: 0,
+          duration: 0.5 * 1000,
+        }).start();
+      });
     }, 500);
   }
   labelState() {
@@ -117,7 +127,7 @@ export default class TemperatureTop extends React.Component {
           <Use href="#WaterDrop" x={0} y={15} width={'20'} height={'20'} />
           <Text x="40" y="0" textAnchor={'middle'} font={{ fontFamily: 'Roboto-Regular' }} fontSize={'20'} fill="white">32%</Text>
         </G>
-        <G x="190" y="15">
+        <G x="190" y="75">
           <AnimatedG y={ySnowflake} fillOpacity={opacitySnowflake}>
             <Use href="#Snowflake" x="-5" width={'10'} height={'10'} />
             <Use href="#Snowflake" width={'30'} height={'30'} />
@@ -128,9 +138,9 @@ export default class TemperatureTop extends React.Component {
           </AnimatedG>
         </G>
         <Circle fill="url(#grad)" cx="200" cy="200" r="190" />
-        <Text textAnchor="middle" fontSize={'20'} x="200" y="80" fill="white" font={{ fontFamily: 'sans-serif' }} style={{ color: '#fff', fontFamily: 'Roboto' }}>
+        <AnimatedText fillOpacity={this.state.opacityState} textAnchor="middle" fontSize={'20'} x="200" y="120" fill="white" font={{ fontFamily: 'sans-serif' }} style={{ color: '#fff', fontFamily: 'Roboto' }}>
           {this.labelState()} {this.props.currentTemperature}&deg;
-        </Text>
+        </AnimatedText>
         <AnimatedTemperatureComponent temperature={this.state.temperatureAnimation} textAnchor="middle" x="200" y="100" fill="white" font={{ fontFamily: 'Roboto-Thin', fontSize: 150 }} style={{ color: '#fff', fontFamily: 'Roboto' }} />
         <G x="340" y="350">
           <Circle
