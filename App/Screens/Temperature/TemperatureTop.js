@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import Svg, {
   Use,
   Text,
@@ -13,8 +13,11 @@ import { number } from 'prop-types';
 import { WaterDrop } from '../../Icons/WaterDrop';
 import { AnimatedTemperatureComponent } from './TemperatureComponent';
 import { AnimatedCustomPath } from './TemperatureBackgroundTop';
-import { Snowflake } from '../../Icons/Snowflake';
-import Flame from '../../Icons/Flame';
+import { AnimatedSnowflake as Snowflake } from '../../Icons/Snowflake';
+import { AnimatedFlame as Flame } from '../../Icons/Flame';
+import { AnimatedG } from '../../Components/AnimatedG';
+
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 
 export default class TemperatureTop extends React.Component {
@@ -52,6 +55,7 @@ export default class TemperatureTop extends React.Component {
         Animated.timing(this.state.colorAnimation, {
           toValue: temperature > 25 ? 100 : 0,
           duration: 1 * 1000,
+          easing: Easing.easeInOut,
         }),
       ];
       Animated.parallel(parallels).start();
@@ -65,6 +69,22 @@ export default class TemperatureTop extends React.Component {
       inputRange: [0, 100],
       outputRange: ['rgb(69,157,245)', 'rgb(247,163,67)'],
     });
+    const opacitySnowflake = this.state.colorAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [1, 0],
+    });
+    const ySnowflake = this.state.colorAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, -50],
+    });
+    const opacityFlame = this.state.colorAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+    });
+    const yFlame = this.state.colorAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [50, 0],
+    });
     return (<Svg style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }} viewBox="0 0 400 550" preserveAspectRatio={'align slice'} >
       <Defs>
         <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="200">
@@ -74,8 +94,8 @@ export default class TemperatureTop extends React.Component {
         </LinearGradient>
       </Defs>
       <WaterDrop fill={'#fff'} id="WaterDrop" />
-      <Flame fill={'#fff'} id="Flame" />
-      <Snowflake fill={'#fff'} id="Snowflake" />
+      <Flame fill={'#fff'} opacity={opacityFlame} id="Flame" />
+      <Snowflake fill={'#fff'} opacity={opacitySnowflake} id="Snowflake" />
       <AnimatedCustomPath
         d="M0 0 H 400 V 400 H 0, M0,400 C100,450 300,450 400,400"
         fill={color}
@@ -86,9 +106,14 @@ export default class TemperatureTop extends React.Component {
           <Text x="40" y="0" textAnchor={'middle'} font={{ fontFamily: 'Roboto-Regular' }} fontSize={'20'} fill="white">32%</Text>
         </G>
         <G x="190" y="15">
-          <Use href="#Snowflake" x="-5" width={'10'} height={'10'} />
-          <Use href="#Snowflake" width={'30'} height={'30'} />
-          <Use href="#Snowflake" x="30" y="10" width={'10'} height={'10'} />
+          <AnimatedG y={ySnowflake} fillOpacity={opacitySnowflake}>
+            <Use href="#Snowflake" x="-5" width={'10'} height={'10'} />
+            <Use href="#Snowflake" width={'30'} height={'30'} />
+            <Use href="#Snowflake" x="30" y="10" width={'10'} height={'10'} />
+          </AnimatedG>
+          <AnimatedG y={yFlame} fillOpacity={opacityFlame}>
+            <Use href="#Flame" width={'30'} height={'30'} />
+          </AnimatedG>
         </G>
         <Circle fill="url(#grad)" cx="200" cy="200" r="190" />
         <Text textAnchor="middle" fontSize={'20'} x="200" y="80" fill="white" font={{ fontFamily: 'sans-serif' }} style={{ color: '#fff', fontFamily: 'Roboto' }}>

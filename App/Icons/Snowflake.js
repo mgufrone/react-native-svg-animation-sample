@@ -1,16 +1,20 @@
 import React from 'react';
 import { Path, Symbol } from 'react-native-svg';
+import { Animated } from 'react-native';
 import { string, number } from 'prop-types';
 
-export const Snowflake = ({ id, ...props }) => (
-  <Symbol
-    id={id}
-    viewBox="0 0 700.236 700.236"
-    preserveAspectRatio={'align slice'}
-  >
-    <Path
-      fill={props.fill}
-      d="M645.527,495.815l-75.609-43.689l63.832-38.015c10.262-4.944,13.438-18.724,7.602-28.855
+export class Snowflake extends React.Component {
+  render() {
+    const { id, ...props } = this.props;
+    return (<Symbol
+      id={id}
+      viewBox="0 0 700.236 700.236"
+      preserveAspectRatio={'align slice'}
+    >
+      <Path
+        fill={props.fill}
+        opacity={props.opacity}
+        d="M645.527,495.815l-75.609-43.689l63.832-38.015c10.262-4.944,13.438-18.724,7.602-28.855
 		c-5.941-10.375-18.764-12.563-28.498-6.89l-85.107,49.849L392.488,349.51l135.258-77.894l85.107,49.768
 		c2.658,1.945,6.078,3.08,9.881,3.08c7.213,0,13.674-3.404,18.617-9.889c5.699-10.294,2.66-23.911-7.602-28.855l-63.832-38.015
 		l75.609-43.688c9.855-5.674,13.244-18.4,7.602-28.856c-5.389-10.051-18.723-13.536-28.879-7.619l-75.99,44.094l-1.135-76.03
@@ -31,13 +35,16 @@ export const Snowflake = ({ id, ...props }) => (
 		V385.985l134.496,77.894l-0.754,99.536c-0.098,11.834,9.119,21.642,20.896,21.642s20.717-9.078,20.895-20.831l1.135-76.435
 		l75.99,44.499c2.934,1.702,6.84,2.27,11.023,2.27c7.977,0,13.828-3.323,17.855-9.889
 		C659.363,514.539,655.382,501.489,645.527,495.815z"
-    />
-  </Symbol>
-);
+      />
+    </Symbol>
+    );
+  }
+}
 Snowflake.propTypes = {
   fill: string,
   id: string.isRequired,
   width: string,
+  opacity: number,
 };
 
 Snowflake.defaultProps = {
@@ -46,6 +53,7 @@ Snowflake.defaultProps = {
   x: 0,
   y: 0,
   width: '30',
+  opacity: 1,
 };
-
+export const AnimatedSnowflake = Animated.createAnimatedComponent(Snowflake);
 export default Snowflake;
