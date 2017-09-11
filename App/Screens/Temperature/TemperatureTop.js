@@ -97,8 +97,8 @@ export default class TemperatureTop extends React.Component {
           <Stop offset="1" stopColor="#4ab2f7" />
         </LinearGradient>
         <LinearGradient id="circleGradHeat" x1="0" y1="0" x2="0" y2="50">
-          <Stop offset="0" stopColor="#439df7" />
-          <Stop offset="1" stopColor="#4ab2f7" />
+          <Stop offset="0" stopColor="#f7a343" />
+          <Stop offset="1" stopColor="#f7b34d" />
         </LinearGradient>
         <LinearGradient id="circleStroke" x1="20" y1="0" x2="0" y2="50">
           <Stop offset="0" stopColor="#e6e6e6" stopOpacity="1" />
