@@ -11,6 +11,7 @@ import {
 } from 'react-native-router-flux';
 import { PowerScreen, PowerIcon } from './Screens/Power';
 import { TemperatureScreen } from './Screens/Temperature';
+import { IndicatorScreen } from './Screens/Indicator';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +45,7 @@ export const App = () => (
             key="tab1"
             initial
             title=""
-            component={TemperatureScreen}
+            component={IndicatorScreen}
             iconName={'cog'}
             renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
               <Icon name="cog" size={25} color="#fff" />

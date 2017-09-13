@@ -4008,12 +4008,22 @@ react-native-side-menu@^1.0.2:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-slider@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-slider/-/react-native-slider-0.11.0.tgz#b68a0bc43c8422b24cd57947cc5ac2bcdb58fadc"
+  dependencies:
+    prop-types "^15.5.6"
+
 react-native-svg@>=4.3.3, "react-native-svg@https://github.com/mgufrone/react-native-svg":
   version "5.4.1"
   resolved "https://github.com/mgufrone/react-native-svg#99db32a7ad0501ecfabeaceda0b52307c55b3810"
   dependencies:
     color "^0.11.1"
     lodash "^4.16.6"
+
+react-native-switch-pro@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-0.4.5.tgz#762eb01f6d8fd75f17def2ae355bfbd3eccadbe5"
 
 react-native-tab-navigator@^0.3.3:
   version "0.3.4"
