@@ -4025,6 +4025,10 @@ react-native-switch-pro@^0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-0.4.5.tgz#762eb01f6d8fd75f17def2ae355bfbd3eccadbe5"
 
+react-native-switch@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-switch/-/react-native-switch-1.1.0.tgz#4dd6e0dc458668a14a69ec1370e0eb7905c77236"
+
 react-native-tab-navigator@^0.3.3:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"

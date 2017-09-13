@@ -43,6 +43,7 @@
     "react-native-shadow": "^1.2.1",
     "react-native-slider": "^0.11.0",
     "react-native-svg": "https://github.com/mgufrone/react-native-svg",
+    "react-native-switch": "^1.1.0",
     "react-native-switch-pro": "^0.4.5",
     "react-native-vector-icons": "^4.3.0",
     "react-redux": "^5.0.6",

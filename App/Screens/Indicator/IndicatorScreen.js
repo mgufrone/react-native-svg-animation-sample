@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Slider from 'react-native-slider';
+import { Switch } from 'react-native-switch';
 import SliderGradient from '../../Components/SliderGradient';
 
 
@@ -14,6 +15,17 @@ export default class IndicatorScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Switch
+          value
+          onValueChange={val => console.log(val)}
+          disabled={false}
+          activeText={''}
+          inActiveText={''}
+          backgroundActive={'#f5c735'}
+          backgroundInactive={'#d8d8d8'}
+          circleActiveColor={'#fff'}
+          circleInActiveColor={'#fff'}
+        />
         <SliderGradient
           colors={['#f5c735', '#fff']}
           start={{ x: 0, y: 0 }}
