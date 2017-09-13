@@ -30,6 +30,7 @@ export default class IndicatorScreen extends React.Component {
             circleInActiveColor={'#fff'}
           />
         </View>
+        <Text>COLOR TEMPERATURE</Text>
         <SliderGradient
           colors={['#f5c735', '#fff']}
           start={{ x: 0, y: 0 }}
@@ -41,6 +42,7 @@ export default class IndicatorScreen extends React.Component {
           value={this.state.value}
           onValueChange={value => this.setState({ value })}
         />
+        <Text>BRIGHTNESS</Text>
         <View style={{ flexDirection: 'row' }}>
           <Icon size={20} name="brightness-low" />
           <View style={{ flex: 1 }}>
