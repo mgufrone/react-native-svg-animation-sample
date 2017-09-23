@@ -2,6 +2,7 @@ import React from 'react';
 import { Animated } from 'react-native';
 import Svg, { Symbol, Use, Stop, G, Defs, LinearGradient, Path, Polyline, Circle } from 'react-native-svg';
 import { string, number } from 'prop-types';
+import GradientDef from './GradientDef';
 
 
 export class FirstIcon extends React.Component {
@@ -10,9 +11,7 @@ export class FirstIcon extends React.Component {
     return (
       <Svg width={width} height={width * 1.5} >
         <Defs>
-          <LinearGradient id="StrokeGradient" x1="10" y1="60" x2="120" y2="120">
-            {colors.map((color, key) => <Stop offset={`${key>0?(key===colors.length-1?100:key/colors.length):0}%`} stopColor={color} />)}
-          </LinearGradient>
+          <GradientDef colors={colors} x1="0" y1="0" x2="120" y2="120" id="StrokeGradient"  />
         </Defs>
         <Symbol id="FirstIcon" width={"120"} height={"120"} viewBox="0 0 120 120">
           <G width="120" height="120" stroke="url(#StrokeGradient)" strokeWidth="10">
