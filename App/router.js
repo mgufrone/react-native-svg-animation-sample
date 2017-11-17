@@ -45,7 +45,7 @@ export const App = () => (
             key="tab1"
             initial
             title=""
-            component={IndicatorScreen}
+            component={TemperatureScreen}
             iconName={'cog'}
             renderRightButton={() => (<TouchableOpacity style={{ marginRight: 10 }} onPress={() => console.log('something')}>
               <Icon name="cog" size={25} color="#fff" />

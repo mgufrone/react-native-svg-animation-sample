@@ -624,6 +624,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				9CCAF9611F5134F300448F77 /* ART.xcodeproj */,
 				DA3B81C6475B4B399EAF7AA9 /* Resources */,
+				9C2342F21F76588C00B1BF46 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -638,6 +639,16 @@
 				2D02E4901E0B4A5D006451C7 /* power-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9C2342F21F76588C00B1BF46 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				15011BFD16284BF6999EB836 /* libRNSVG.a */,
+				77B13B0B8AAF4032B27A2FFF /* libRNVectorIcons.a */,
+				B0A9308F81BF46DD9D6C8FD5 /* libBVLinearGradient.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		9C93E5A21F63CAB100FA55C2 /* Products */ = {
